@@ -1,0 +1,43 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://addons/parrot/resources/dialog_resource.gd" type="Script" id=1]
+[ext_resource path="res://addons/parrot/resources/dialog_line_resource.gd" type="Script" id=2]
+[ext_resource path="res://addons/parrot/resources/character_resource.gd" type="Script" id=3]
+
+
+
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 3 )
+name = "ben"
+color = Color( 0.584314, 0.686275, 0.447059, 1 )
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+character = SubResource( 1 )
+text = "That's Judith. The light from the fire is making her grey hair sparkle. She's laughing and-"
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
+name = "ben"
+color = Color( 0.584314, 0.686275, 0.447059, 1 )
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+character = SubResource( 3 )
+text = "-her face has creased up."
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 3 )
+name = "ben"
+color = Color( 0.584314, 0.686275, 0.447059, 1 )
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+character = SubResource( 5 )
+text = "I love that."
+
+[resource]
+script = ExtResource( 1 )
+id = "1d_photo_judith"
+lines = [ SubResource( 2 ), SubResource( 4 ), SubResource( 6 ) ]

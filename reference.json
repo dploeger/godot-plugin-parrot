@@ -1,0 +1,503 @@
+{
+  "name": "Parrot",
+  "description": "",
+  "version": null,
+  "classes": [
+    {
+      "name": "",
+      "path": "res://addons/parrot/plugin.gd",
+      "extends_class": [
+        "EditorPlugin"
+      ],
+      "extends_file": "",
+      "icon": "",
+      "signature": "class plugin.gd",
+      "description": " Parrot - a simple dialogue plugin\n",
+      "sub_classes": [
+
+      ],
+      "constants": [
+
+      ],
+      "members": [
+        {
+          "name": "_importer",
+          "data_type": "Importer",
+          "default_value": null,
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var _importer: Importer",
+          "description": " The importer scene\n"
+        }
+      ],
+      "signals": [
+
+      ],
+      "methods": [
+        {
+          "name": "_enter_tree",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func _enter_tree()",
+          "description": " Add the ParrotDialog scene singleton and the import menu button\n",
+          "arguments": [
+
+          ]
+        },
+        {
+          "name": "_exit_tree",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func _exit_tree()",
+          "description": " remove the singleton and the import menu button\n",
+          "arguments": [
+
+          ]
+        },
+        {
+          "name": "_on_import_menu_clicked",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func _on_import_menu_clicked(_ud)",
+          "description": " Show the importer on the tool menu\n",
+          "arguments": [
+            {
+              "name": "_ud",
+              "type": "var"
+            }
+          ]
+        }
+      ],
+      "static_functions": [
+
+      ]
+    },
+    {
+      "name": "",
+      "path": "res://addons/parrot/scenes/parrot_dialog.gd",
+      "extends_class": [
+        "CanvasLayer"
+      ],
+      "extends_file": "",
+      "icon": "",
+      "signature": "class parrot_dialog.gd",
+      "description": " Parrot dialog main scene\n",
+      "sub_classes": [
+
+      ],
+      "constants": [
+
+      ],
+      "members": [
+        {
+          "name": "voices_path",
+          "data_type": "String",
+          "default_value": "res://voices",
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var voices_path: String = \"res://voices\"",
+          "description": " The path where the voice file are\n"
+        },
+        {
+          "name": "voices_ext",
+          "data_type": "String",
+          "default_value": "ogg",
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var voices_ext: String = \"ogg\"",
+          "description": " The extension of the voice files\n"
+        },
+        {
+          "name": "time_addendum_seconds",
+          "data_type": "int",
+          "default_value": 2,
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var time_addendum_seconds: int = 2",
+          "description": " How much pause time to add\n"
+        },
+        {
+          "name": "reading_speed_words_per_minute",
+          "data_type": "int",
+          "default_value": 160,
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var reading_speed_words_per_minute: int = 160",
+          "description": " The assumed readin speech (if no voice file exists for a line)\n"
+        },
+        {
+          "name": "subtitles",
+          "data_type": "var",
+          "default_value": null,
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var subtitles",
+          "description": " Wether subtitles are displayed\n"
+        },
+        {
+          "name": "_current_dialog",
+          "data_type": "DialogResource",
+          "default_value": null,
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var _current_dialog: DialogResource",
+          "description": " The current dialog playing\n"
+        },
+        {
+          "name": "_current_line",
+          "data_type": "int",
+          "default_value": null,
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var _current_line: int",
+          "description": " The line in the current dialog\n"
+        }
+      ],
+      "signals": [
+        {
+          "name": "finished_line",
+          "arguments": [
+
+          ],
+          "signature": "signal finished_line()",
+          "description": " Emitted when a line was finished\n"
+        },
+        {
+          "name": "finished_dialog",
+          "arguments": [
+
+          ],
+          "signature": "signal finished_dialog()",
+          "description": " Emitted when the complete dialog was finished\n"
+        }
+      ],
+      "methods": [
+        {
+          "name": "_ready",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func _ready()",
+          "description": " Hide the subtitles when starting\n",
+          "arguments": [
+
+          ]
+        },
+        {
+          "name": "_input",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func _input(event)",
+          "description": " Skip the line on ui_skip action\n",
+          "arguments": [
+            {
+              "name": "event",
+              "type": "var"
+            }
+          ]
+        },
+        {
+          "name": "configure",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func configure(theme: Theme)",
+          "description": " Configure Parrot. Set the theme to be used for the dialogs\n",
+          "arguments": [
+            {
+              "name": "theme",
+              "type": "Theme"
+            }
+          ]
+        },
+        {
+          "name": "play",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func play(dialog: DialogResource)",
+          "description": " Play the specified dialog\n\n ** Arguments **\n - dialog: The dialog to play\n",
+          "arguments": [
+            {
+              "name": "dialog",
+              "type": "DialogResource"
+            }
+          ]
+        },
+        {
+          "name": "advance",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func advance()",
+          "description": " Advance one line in the dialog\n",
+          "arguments": [
+
+          ]
+        },
+        {
+          "name": "_on_Skip_pressed",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func _on_Skip_pressed()",
+          "description": " The player hit the skip panel\n",
+          "arguments": [
+
+          ]
+        }
+      ],
+      "static_functions": [
+
+      ]
+    },
+    {
+      "name": "Importer",
+      "path": "res://addons/parrot/scenes/importer.gd",
+      "extends_class": [
+        "Control"
+      ],
+      "extends_file": "",
+      "icon": "",
+      "signature": "class Importer",
+      "description": " An importer to build dialog resources based on CSV files\n",
+      "sub_classes": [
+
+      ],
+      "constants": [
+
+      ],
+      "members": [
+        {
+          "name": "import_delimiter",
+          "data_type": "String",
+          "default_value": ";",
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var import_delimiter: String = \";\"",
+          "description": " The delimiter used in the CSV file\n"
+        },
+        {
+          "name": "_import_file",
+          "data_type": "String",
+          "default_value": null,
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var _import_file: String",
+          "description": " The current import file\n"
+        }
+      ],
+      "signals": [
+
+      ],
+      "methods": [
+        {
+          "name": "start_import",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func start_import()",
+          "description": " Show the import source dialog to get started\n",
+          "arguments": [
+
+          ]
+        },
+        {
+          "name": "_on_ImportDialog_file_selected",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func _on_ImportDialog_file_selected(path)",
+          "description": " A source file was selected\n\n ** Arguments **\n - The path of the import file\n",
+          "arguments": [
+            {
+              "name": "path",
+              "type": "var"
+            }
+          ]
+        },
+        {
+          "name": "_on_TargetDialog_dir_selected",
+          "return_type": "var",
+          "rpc_mode": 0,
+          "signature": "func _on_TargetDialog_dir_selected(dir)",
+          "description": " A target dir was selected. This starts the import\n\n ** Arguments **\n - The target directory\n",
+          "arguments": [
+            {
+              "name": "dir",
+              "type": "var"
+            }
+          ]
+        }
+      ],
+      "static_functions": [
+
+      ]
+    },
+    {
+      "name": "DialogResource",
+      "path": "res://addons/parrot/resources/dialog_resource.gd",
+      "extends_class": [
+        "Resource"
+      ],
+      "extends_file": "",
+      "icon": "",
+      "signature": "class DialogResource",
+      "description": " A dialog of characters speaking (or a monolog as well)\n",
+      "sub_classes": [
+
+      ],
+      "constants": [
+
+      ],
+      "members": [
+        {
+          "name": "id",
+          "data_type": "String",
+          "default_value": null,
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var id: String",
+          "description": " The descriptive id of this dialog\n"
+        },
+        {
+          "name": "lines",
+          "data_type": "Array",
+          "default_value": null,
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var lines: Array",
+          "description": " A list of dialog lines to speak\n"
+        }
+      ],
+      "signals": [
+
+      ],
+      "methods": [
+        {
+          "name": "_get_property_list",
+          "return_type": "Array",
+          "rpc_mode": 0,
+          "signature": "func _get_property_list() -> Array",
+          "description": " Build the property list\n\n ** Returns **\n - The list of properties\n",
+          "arguments": [
+
+          ]
+        }
+      ],
+      "static_functions": [
+
+      ]
+    },
+    {
+      "name": "DialogLineResource",
+      "path": "res://addons/parrot/resources/dialog_line_resource.gd",
+      "extends_class": [
+        "Resource"
+      ],
+      "extends_file": "",
+      "icon": "",
+      "signature": "class DialogLineResource",
+      "description": " A resource describing one line in a dialogue\n",
+      "sub_classes": [
+
+      ],
+      "constants": [
+
+      ],
+      "members": [
+        {
+          "name": "character",
+          "data_type": "Resource",
+          "default_value": null,
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var character: Resource",
+          "description": " The character speaking\n"
+        },
+        {
+          "name": "text",
+          "data_type": "String",
+          "default_value": null,
+          "setter": "",
+          "getter": "",
+          "export": false,
+          "signature": "var text: String",
+          "description": " The text the character says\n"
+        }
+      ],
+      "signals": [
+
+      ],
+      "methods": [
+        {
+          "name": "_get_property_list",
+          "return_type": "Array",
+          "rpc_mode": 0,
+          "signature": "func _get_property_list() -> Array",
+          "description": " Build the property list\n\n ** Returns **\n - The list of properties\n",
+          "arguments": [
+
+          ]
+        }
+      ],
+      "static_functions": [
+
+      ]
+    },
+    {
+      "name": "CharacterResource",
+      "path": "res://addons/parrot/resources/character_resource.gd",
+      "extends_class": [
+        "Resource"
+      ],
+      "extends_file": "",
+      "icon": "",
+      "signature": "class CharacterResource",
+      "description": " A resource describing a dialog character\n",
+      "sub_classes": [
+
+      ],
+      "constants": [
+
+      ],
+      "members": [
+        {
+          "name": "name",
+          "data_type": "String",
+          "default_value": "",
+          "setter": "",
+          "getter": "",
+          "export": true,
+          "signature": "export var name: String = \"\"",
+          "description": " The name of the character\n"
+        },
+        {
+          "name": "color",
+          "data_type": "Color",
+          "default_value": "0,0,0,1",
+          "setter": "",
+          "getter": "",
+          "export": true,
+          "signature": "export var color: Color = \"0,0,0,1\"",
+          "description": " The subtitle color of the character\n"
+        }
+      ],
+      "signals": [
+
+      ],
+      "methods": [
+
+      ],
+      "static_functions": [
+
+      ]
+    }
+  ]
+}

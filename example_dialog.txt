@@ -1,0 +1,4 @@
+dialog_id;character_name;character_color;text
+1d_photo_judith;ben;95af72;That's Judith. The light from the fire is making her grey hair sparkle. She's laughing and-
+1d_photo_judith;ben;95af72;-her face has creased up.
+1d_photo_judith;ben;95af72;I love that.

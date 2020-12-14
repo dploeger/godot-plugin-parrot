@@ -46,7 +46,7 @@ dialog files and import them using Project/Tools/Import Dialog.
 
 The following API-Docs are available:
 
-* (CharacterResource)[docs/CharacterResource.md]
-* (DialogLineResource)[docs/DialogLineResource.md]
-* (DialogResource)[docs/DialogResource.md]
-* (Importer)[docs/Importer.md]
+* [CharacterResource](docs/CharacterResource.md)
+* [DialogLineResource](docs/DialogLineResource.md)
+* [DialogResource](docs/DialogResource.md)
+* [Importer](docs/Importer.md)
